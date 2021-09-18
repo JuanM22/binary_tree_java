@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author DELL
+ * @author JUAN
  */
 public class Main {
 
@@ -131,16 +131,16 @@ public class Main {
         //// ******************************************** ////////////////
         NodeT left = new NodeT(getValue(listRepresentation, 0), null, null);
         tree.getRoot().setLeft(left);
-        tree = createChildren(values.get(0), left, tree);
+        createChildren(values.get(0), left);
         /////////////////////
         NodeT right = new NodeT(getValue(values.get(1), 0), null, null);
         tree.getRoot().setRight(right);
         listRepresentation = values.get(1).substring(values.get(1).indexOf("(") + 1, values.get(1).length() - 1);
-        tree = createChildren(listRepresentation, right, tree);
+        createChildren(listRepresentation, right);
         return tree;
     }
 
-    public Tree createChildren(String subList, NodeT father, Tree tree) {
+    public void createChildren(String subList, NodeT father) {
         if (subList != null && father != null) {
             if (subList.charAt(subList.length() - 1) == ' ') {
                 subList = subList.substring(0, subList.length() - 2);
@@ -159,18 +159,17 @@ public class Main {
             }
             if (subList.contains("(")) {
                 if (subList.indexOf(",") > subList.indexOf("(")) {
-                    tree = createChildren(values.get(0), left, tree);
+                    createChildren(values.get(0), left);
                 }
                 if (values.size() > 1) {
                     String data = values.get(1);
                     if (data.contains("(")) {
                         data = data.substring(data.indexOf("(") + 1, data.length() - 1);
                     }
-                    tree = createChildren(data, right, tree);
+                    createChildren(data, right);
                 }
             }
         }
-        return tree;
     }
 
     public static int getValue(String values, int start) {
