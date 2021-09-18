@@ -142,9 +142,6 @@ public class Main {
 
     public void createChildren(String subList, NodeT father) {
         if (subList != null && father != null) {
-            if (subList.charAt(subList.length() - 1) == ' ') {
-                subList = subList.substring(0, subList.length() - 2);
-            }
             NodeT left = (subList.charAt(0) != '_') ? new NodeT(getValue(subList, 0), null, null) : null;
             father.setLeft(left);
             //////////////////////
